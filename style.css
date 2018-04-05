@@ -1,0 +1,25 @@
+
+body{
+  background-image: url('https://www.walldevil.com/wallpapers/a90/music-cool-backgrounds-wallpapers-twitter.jpg');
+}
+
+main{
+  width: 80%;
+  height: 100vh;
+  margin: 10px auto;
+  text-align: center;
+}
+
+h1{
+  font-size: 7vh;
+  color: white;
+  font-family: 'Abril Fatface', cursive;
+}
+
+input{
+  width: 75vh;
+  height: 5vh;
+  font-size: 2vh;
+  font-family: 'Abril Fatface', cursive;
+
+}

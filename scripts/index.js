@@ -1,8 +1,8 @@
-// import Trie from './Trie';
-const Trie = require('./scripts/Trie');
-const words = require('./scripts/words.json');
+const Trie = require('../scripts/Trie');
+const Node = require('../scripts/Node');
 
 const trie = new Trie();
+
 
 const list = document.querySelector('.title')
 

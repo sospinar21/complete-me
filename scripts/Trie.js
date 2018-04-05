@@ -57,11 +57,24 @@ class Trie {
     this.printFunction(suggestions)
     return suggestions;
   }
+
+  select(word){
+    let newArr = [...word]
+    newArr.forEach(letter => {
+      // iterate each node and find the end of the word 
+      //  add a counter to the node
+      //  find the counter of the last node
+      //  create an object with the word and the counter
+      //  push that object to the array and sort the array by counter number
+      //  push sorted array to the suggestions array 
+      //  
+    })
+
+  }
   
   populate(){
     const text = "/usr/share/dict/words"
     const dictionary = fs.readFileSync(text).toString().trim().split('\n')
-    
     dictionary.forEach(word => {
       this.insert(word)
     })
@@ -70,11 +83,19 @@ class Trie {
 
   count(){
     let count = this.wordCount
-    this.printFunction(count)
+    return count;
   }
 
   printFunction(thingToPrint){
-    console.log(thingToPrint)
+    console.log('testinggg',thingToPrint)
+  }
+
+  delete(str) {
+    let currentNode = [...str]
+    if (currentNode && currentNode.isWord) {
+        currentNode.isWord = false;
+        this.wordCount--;
+    }
   }
 }
 
@@ -85,11 +106,7 @@ class Trie {
   t.insert('goodBye')
   t.count()
   t.suggest('he')
-  // t.count()
   t.populate()
   t.suggest('piz')
-
-  // console.log(t)
-  // t.printFunction('hi')
 
 module.exports = Trie;
