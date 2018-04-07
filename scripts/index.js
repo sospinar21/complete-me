@@ -1,7 +1,7 @@
-const Trie = require('../scripts/Trie');
-const Node = require('../scripts/Node');
+const Trie = require('./Trie');
+const Node = require('./Node');
 
-const trie = new Trie();
+// const trie = new Trie();
 
 
 const list = document.querySelector('.title')

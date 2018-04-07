@@ -90,6 +90,18 @@ describe('suggest', () => {
     expect(suggested).to.deep.equal([])
   })
 
+  it('should sort suggestions by rating', () => {
+    trie.insert('burger');
+    trie.insert('burrito');
+    trie.insert('butt');
+    trie.select('burrito');
+    trie.select('burrito');
+
+    let suggested = trie.suggest('bu')
+    expect(suggested).to.deep.equal(['burrito', 'burger', 'butt'])
+  })
+
+
  })
 
 describe('populate', () => {
@@ -127,21 +139,33 @@ describe('count', () => {
     })
 })
 
-describe('delete', () => {
-  
-  beforeEach(() => {
+
+describe('select', () => {
+
+   beforeEach(() => {
     trie = new Trie();
   })
 
-  it('should be a function', () => {
-    expect(trie.delete).to.exist
-  })
-
-   it('should detele words and decrease the count', () => {
-      trie.populate()
-      trie.delete('run')
-      trie.delete('jump')
-      expect(trie.wordCount).to.equal(235886);
+    it('should be a function', () => {
+    expect(trie.select).to.exist
     })
+
+    it('should increase the nodes rating by one when selected ', () => {
+      trie.insert('fries')
+      trie.select('fries')
+
+      expect(trie.root.children.f.children.r.children.i.children.e.children.s.rating).to.equal(1)
+    })
+
+    it('should increase the nodes rating by one for each time it\'s selected', () => {
+      trie.insert('water')
+      trie.select('water')
+      trie.select('water')
+      trie.select('water')
+
+      expect(trie.root.children.w.children.a.children.t.children.e.children.r.rating).to.equal(3)
+    })
+
 })
+
 }) 

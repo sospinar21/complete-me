@@ -24,24 +24,27 @@ class Trie {
   }
 
   suggest(str){
-    let letters = [...str]
-    const suggestions = []
+    let letters = [...str];
+    const suggestions = [];
     let currentNode = this.root;
-    if(!currentNode.children[letters[0]]){
-      return suggestions
-    }
 
-    letters.forEach(letter => {
-      if(currentNode.children){
-        if(currentNode.children[letter]){
-          currentNode = currentNode.children[letter]
+
+
+    for(let i =0; i < letters.length; i++) {
+        if(currentNode.children[letters[i]]){
+          currentNode = currentNode.children[letters[i]]
+        } else {
+          return []
         }
-      }  
-    })
+    }
 
     let findWord = (str, currentNode) => {
       if(currentNode.isWord){
-        suggestions.push(str)
+        let suggestion = {
+          word: str,
+          rating: currentNode.rating
+        }
+        suggestions.push(suggestion)
       }
       if(currentNode.children){
         let childKeys = Object.keys(currentNode.children)
@@ -54,23 +57,23 @@ class Trie {
     }
 
     findWord(str,currentNode)
-    this.printFunction(suggestions)
-    return suggestions;
+
+    const sortedSuggestions = suggestions.sort((b, a) => a.rating - b.rating).map(wordObject => wordObject.word)
+    return sortedSuggestions;
   }
 
   select(word){
+    let currentNode = this.root;
     let newArr = [...word]
-    newArr.forEach(letter => {
-      // iterate each node and find the end of the word 
-      //  add a counter to the node
-      //  find the counter of the last node
-      //  create an object with the word and the counter
-      //  push that object to the array and sort the array by counter number
-      //  push sorted array to the suggestions array 
-      //  
-    })
-
-  }
+    for(let i =0; i < newArr.length; i++) {
+        if(currentNode.children[newArr[i]]){
+          currentNode = currentNode.children[newArr[i]]
+        } else {
+          return []
+        }
+    }
+    currentNode.rating++
+ }
   
   populate(){
     const text = "/usr/share/dict/words"
@@ -88,14 +91,6 @@ class Trie {
 
   printFunction(thingToPrint){
     console.log('testinggg',thingToPrint)
-  }
-
-  delete(str) {
-    let currentNode = [...str]
-    if (currentNode && currentNode.isWord) {
-        currentNode.isWord = false;
-        this.wordCount--;
-    }
   }
 }
 
