@@ -20,7 +20,6 @@ describe('NODE', () => {
     expect(node.children).to.deep.equal({});
   });
 
-
   it('expect to have a property of isWord dafault to false', () => {
     expect(node.isWord).to.equal(false);
   })

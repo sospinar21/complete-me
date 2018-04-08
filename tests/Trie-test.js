@@ -14,11 +14,11 @@ describe('TRIE', () => {
     trie = new Trie()
   })
 
-  it('expect to exist', () => {
+  it('should exist', () => {
     expect(trie).to.exist;
   });
 
-  it('expect to have a root node that begins as null', () => {
+  it('expect to have a root node that creates a new node', () => {
     let node = new Node();
     expect(trie.root).to.deep.equal(node);
   });
@@ -27,17 +27,22 @@ describe('TRIE', () => {
     expect(trie.wordCount).to.equal(0);
   });
   
-describe('insert', () => {
+describe('INSERT', () => {
 
   it('should be able to insert a word', () => {
     trie.insert('hello');
     expect(trie.root).to.be.instanceOf(Node)
   })
 
-  it('should increase the wordCount with each word passed in', () => {
-    trie.insert('a');
-    expect(trie.root.children.a).to.exist;
-    expect(trie.wordCount).to.equal(1);
+  it('should start with cero words', () => {
+    expect(trie.wordCount).to.equal(0);
+  });
+
+  it('should increase the wordCount', () => {
+    trie.insert('aloha');
+    trie.insert('apple');
+    trie.insert('adios');
+    expect(trie.wordCount).to.equal(3);
   });
 
   it('should be able to insert a word and root should have children', () => {
@@ -59,7 +64,7 @@ describe('insert', () => {
     expect(trie.wordCount).to.equal(2);
   });
   
-  it('should no update the count property when a repeat word is inserted', () => {
+  it('should not update the count property when a repeat word is inserted', () => {
     trie.insert('saludes');
     expect(trie.wordCount).to.equal(1);
     trie.insert('saludes');
@@ -112,7 +117,6 @@ describe('populate', () => {
 
   it('should be a function', () => {
     expect(trie.populate).to.exist
-    // console.log(JSON.stringify(trie, null, 2))
   })
 
   it('should have lots of words after dictionary is populated', () => {
@@ -144,7 +148,7 @@ describe('select', () => {
 
    beforeEach(() => {
     trie = new Trie();
-  })
+    })
 
     it('should be a function', () => {
     expect(trie.select).to.exist
@@ -153,7 +157,6 @@ describe('select', () => {
     it('should increase the nodes rating by one when selected ', () => {
       trie.insert('fries')
       trie.select('fries')
-
       expect(trie.root.children.f.children.r.children.i.children.e.children.s.rating).to.equal(1)
     })
 
@@ -162,10 +165,8 @@ describe('select', () => {
       trie.select('water')
       trie.select('water')
       trie.select('water')
-
       expect(trie.root.children.w.children.a.children.t.children.e.children.r.rating).to.equal(3)
     })
-
 })
 
 }) 

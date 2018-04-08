@@ -88,20 +88,6 @@ class Trie {
     let count = this.wordCount
     return count;
   }
-
-  printFunction(thingToPrint){
-    console.log('testinggg',thingToPrint)
-  }
 }
-
-
-  var t = new Trie()
-  t.insert('hello')
-  t.count()
-  t.insert('goodBye')
-  t.count()
-  t.suggest('he')
-  t.populate()
-  t.suggest('piz')
 
 module.exports = Trie;
